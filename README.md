@@ -2,7 +2,7 @@
 
 From [here](https://youtube.com/playlist?list=PLFHz2csJcgk_M6tg-f589Myy-lbLyACKi&si=1bw1MgG9Mpk2sjSA).
 
-## Installation
+### Installation
 
 ```bash
 composer require filament/filament:"^3.2" -W
@@ -20,6 +20,36 @@ php artisan make:filament-user
 php artisan vendor:publish --tag=filament-config
 ```
 
-## License
+### Content
+ 
+```bash
+php artisan make:model Category -m
+```
+ 
+```bash
+php artisan make:model Brand -m
+```
+ 
+```bash
+php artisan make:model Product -m
+```
+ 
+```bash
+php artisan make:model Customer -m
+```
+ 
+```bash
+php artisan make:model Order -m
+```
+ 
+```bash
+php artisan make:model OrderItem -m
+```
+ 
+```bash
+php artisan make:migration create_category_product_table
+```
+
+### License
 
 Licensed under the [MIT license](https://opensource.org/licenses/MIT).
