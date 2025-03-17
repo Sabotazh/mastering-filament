@@ -20,7 +20,7 @@ php artisan make:filament-user
 php artisan vendor:publish --tag=filament-config
 ```
 
-### Content
+### Models
  
 ```bash
 php artisan make:model Category -m
@@ -48,6 +48,16 @@ php artisan make:model OrderItem -m
  
 ```bash
 php artisan make:migration create_category_product_table
+```
+ 
+### Resources
+
+```bash
+php artisan storage:link
+```
+
+```bash
+php artisan make:filament-resource Product
 ```
 
 ### License

@@ -26,7 +26,7 @@ class Product extends Model
         'published_at',
     ];
 
-    public function brands(): BelongsTo
+    public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
     }
