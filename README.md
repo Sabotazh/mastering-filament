@@ -60,6 +60,10 @@ php artisan storage:link
 php artisan make:filament-resource Product
 ```
 
+```bash
+php artisan make:filament-resource Brand
+```
+
 ### License
 
 Licensed under the [MIT license](https://opensource.org/licenses/MIT).

@@ -25,6 +25,8 @@ class ProductResource extends Resource
 
     protected static ?string $navigationGroup = 'Shop';
 
+    protected static ?int $navigationSort = 0;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -52,7 +54,7 @@ class ProductResource extends Resource
                                     ->unique(Product::class, 'slug', ignoreRecord: true),
 
                                 Forms\Components\MarkdownEditor::make('description')
-                                    ->columnSpan('full')
+                                    ->columnSpanFull()
                             ])->columns(2),
 
                         Forms\Components\Section::make('Pricing & Inventory')
@@ -162,7 +164,11 @@ class ProductResource extends Resource
                 Tables\Filters\SelectFilter::make('brand')->relationship('brand', 'name')
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make()
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
