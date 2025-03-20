@@ -64,6 +64,18 @@ php artisan make:filament-resource Product
 php artisan make:filament-resource Brand
 ```
 
+```bash
+php artisan make:filament-resource Customer
+```
+
+```bash
+php artisan make:filament-resource Order
+```
+
+```bash
+php artisan make:filament-resource Category
+```
+
 ### License
 
 Licensed under the [MIT license](https://opensource.org/licenses/MIT).
