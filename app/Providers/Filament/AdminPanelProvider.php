@@ -27,9 +27,11 @@ class AdminPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->login()
+            ->profile()
             ->colors([
                 'primary' => Color::Blue,
             ])
+            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->font('Ubuntu')
             ->favicon('images/favicon.png')
 //            ->darkMode(false)
