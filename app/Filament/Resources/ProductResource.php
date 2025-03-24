@@ -32,6 +32,22 @@ class ProductResource extends Resource
 
     protected static int $globalSearchResultsLimit = 20;
 
+//    protected static bool $shouldRegisterNavigation = false;
+
+//    protected static ?string $activeNavigationIcon = 'heroicon-o-check-badge';
+
+//    public static function getNavigationBadge(): ?string
+//    {
+////        return 'NEW';
+////        return static::getModel()::count();
+////        return static::getModel()::where('quantity', '=', 28)->count();
+//    }
+
+//    public static function getNavigationBadgeColor(): ?string
+//    {
+//        return static::getModel()::where('quantity', '=', 28)->count() > 10 ? 'warning' : 'primary';
+//    }
+
     public static function getGloballySearchableAttributes(): array
     {
         return ['name', 'slug', 'description'];

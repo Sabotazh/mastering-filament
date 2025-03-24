@@ -6,6 +6,8 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -13,6 +15,7 @@ use Filament\Support\Colors\Color;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
@@ -27,11 +30,29 @@ class AdminPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->login()
-            ->profile()
+//            ->profile()
             ->colors([
                 'primary' => Color::Blue,
             ])
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
+            ->sidebarCollapsibleOnDesktop()
+//            ->sidebarFullyCollapsibleOnDesktop()
+            ->navigationItems([
+                NavigationItem::make('Google')
+                    ->url('https://google.com', shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-pencil-square')
+                    ->group('External')
+                    ->sort(2)
+                    ->visible(fn(): bool => auth()->user()->can('view')) // hidden
+            ])
+            ->userMenuItems([
+                MenuItem::make()
+                    ->label('Settings')
+                    ->url('')
+                    ->icon('heroicon-o-cog-6-tooth'),
+                'logout' => MenuItem::make()->label('Log Out')
+            ])
+            ->breadcrumbs(false)
             ->font('Ubuntu')
             ->favicon('images/favicon.png')
 //            ->darkMode(false)
