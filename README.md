@@ -90,6 +90,24 @@ php artisan make:filament-relation-manager BrandResource products name
 php artisan make:filament-relation-manager CategoryResource products name
 ```
 
+### Widgets
+
+```bash
+php artisan make:filament-widget StatsOverview --stats-overview
+```
+
+```bash
+php artisan make:filament-widget ProductsChart --chart
+```
+
+```bash
+php artisan make:filament-widget OrdersChart --chart
+```
+
+```bash
+php artisan make:filament-widget LatestOrders --table
+```
+
 ### License
 
 Licensed under the [MIT license](https://opensource.org/licenses/MIT).

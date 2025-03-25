@@ -43,7 +43,7 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-pencil-square')
                     ->group('External')
                     ->sort(2)
-                    ->visible(fn(): bool => auth()->user()->can('view')) // hidden
+                    ->hidden(fn(): bool => auth()->user()->can('view')) // visible
             ])
             ->userMenuItems([
                 MenuItem::make()
