@@ -50,6 +50,10 @@ php artisan make:model OrderItem -m
 php artisan make:migration create_category_product_table
 ```
  
+```bash
+php artisan make:migration delete_total_price_from_orders_table --table=orders
+```
+ 
 ### Resources
 
 ```bash
@@ -74,6 +78,16 @@ php artisan make:filament-resource Order
 
 ```bash
 php artisan make:filament-resource Category
+```
+
+### Relation managers
+
+```bash
+php artisan make:filament-relation-manager BrandResource products name
+```
+
+```bash
+php artisan make:filament-relation-manager CategoryResource products name
 ```
 
 ### License

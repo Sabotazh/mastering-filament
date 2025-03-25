@@ -43,15 +43,21 @@ class OrderResource extends Resource
                                 ->searchable()
                                 ->relationship('customer', 'name'),
 
-                            Forms\Components\Select::make('type')
+                            Forms\Components\TextInput::make('shipping_price')
+                                ->label('Shipping costs')
+                                ->required()
+                                ->numeric()
+                                ->dehydrated(),
+
+                            Forms\Components\Select::make('status')
+                                ->label('Type')
                                 ->required()
                                 ->options([
                                     'pending' => OrderStatusEnum::PENDING->value,
                                     'processing' => OrderStatusEnum::PROCESSING->value,
                                     'completed' => OrderStatusEnum::COMPLETED->value,
                                     'declined' => OrderStatusEnum::DECLINED->value,
-                                ])
-                                ->columnSpanFull(),
+                                ]),
 
                             Forms\Components\MarkdownEditor::make('notes')
                                 ->columnSpanFull()
@@ -64,11 +70,17 @@ class OrderResource extends Resource
                                 ->schema([
                                     Forms\Components\Select::make('product_id')
                                         ->label('Product')
-                                        ->options(Product::query()->pluck('name', 'id')),
+                                        ->options(Product::query()->pluck('name', 'id'))
+                                        ->required()
+                                        ->reactive()
+                                        ->afterStateUpdated(fn($state, Forms\Set $set) =>
+                                        $set('unit_price', Product::query()->find($state)?->price ?? 0)),
 
                                     Forms\Components\TextInput::make('quantity')
                                         ->required()
                                         ->numeric()
+                                        ->live()
+                                        ->dehydrated()
                                         ->default(1),
 
                                     Forms\Components\TextInput::make('unit_price')
@@ -76,8 +88,14 @@ class OrderResource extends Resource
                                         ->required()
                                         ->numeric()
                                         ->disabled()
-                                        ->dehydrated()
-                                ])->columns(3)
+                                        ->dehydrated(),
+
+                                    Forms\Components\Placeholder::make('total_price')
+                                        ->label('Total price')
+                                        ->content(function ($get) {
+                                            return $get('unit_price') * $get('quantity');
+                                        }),
+                                ])->columns(4)
                         ]),
                 ])->columnSpanFull()
             ]);
@@ -104,13 +122,13 @@ class OrderResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('total_price')
-                    ->searchable()
-                    ->sortable()
-                    ->summarize([
-                        Tables\Columns\Summarizers\Sum::make()
-                            ->money()
-                    ]),
+//                Tables\Columns\TextColumn::make('total_price')
+//                    ->searchable()
+//                    ->sortable()
+//                    ->summarize([
+//                        Tables\Columns\Summarizers\Sum::make()
+//                            ->money()
+//                    ]),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Order date')
